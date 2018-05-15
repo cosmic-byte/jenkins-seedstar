@@ -29,9 +29,9 @@ class Initiate:
         self.conn.commit()
         self.conn.close()
 
-        self.server.create_job('first-job', jenkins.EMPTY_CONFIG_XML)
-        self.server.create_job('second-job', jenkins.EMPTY_CONFIG_XML)
-        self.server.create_job('third-job', jenkins.EMPTY_CONFIG_XML)
+        self.server.create_job('first_job', jenkins.EMPTY_CONFIG_XML)
+        self.server.create_job('second_job', jenkins.EMPTY_CONFIG_XML)
+        self.server.create_job('third_job', jenkins.EMPTY_CONFIG_XML)
 
 if __name__ == '__main__':
     init = Initiate()

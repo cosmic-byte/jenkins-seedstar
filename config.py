@@ -1,29 +1,12 @@
-import sqlite3
+from initialScript import Initiate
 
 
-class Config:
+class DbOperations:
     def __init__(self):
-        DATABASE_NAME = 'job_script.sqlite'
-
-        self.conn = sqlite3.connect(DATABASE_NAME)
-        self.jobs = 'jobs'
-        self.c = self.conn.cursor()
-
-    def start(self):
-        self.c.execute('CREATE TABLE {tn} ({nf} {ft})' \
-                  .format(tn=self.jobs, nf='id', ft='INTEGER PRIMARY KEY'))
-
-        self.c.execute("ALTER TABLE {tn} ADD COLUMN '{cn}' {ct}" \
-                  .format(tn=self.jobs, cn='name', ct='TEXT'))
-
-        self.c.execute("ALTER TABLE {tn} ADD COLUMN '{cn}' {ct}" \
-                  .format(tn=self.jobs, cn='status', ct='TEXT'))
-
-        self.c.execute("ALTER TABLE {tn} ADD COLUMN '{cn}' {ct}" \
-                  .format(tn=self.jobs, cn='time', ct='TEXT'))
-
-        self.conn.commit()
-        self.conn.close()
+        db = Initiate()
+        self.conn = db.conn
+        self.jobs = db.jobs
+        self.c = db.c
 
     def save(self, data):
         self.c.execute("INSERT OR IGNORE INTO {tn} (name, status, time) VALUES ({n}, {s}, {t})". \

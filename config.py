@@ -24,3 +24,10 @@ class Config:
 
         self.conn.commit()
         self.conn.close()
+
+    def save(self, data):
+        self.c.execute("INSERT OR IGNORE INTO {tn} (name, status, time) VALUES ({n}, {s}, {t})". \
+                  format(tn=self.jobs, n=data.name, s=data.status, t=data.time))
+
+        self.conn.commit()
+        self.conn.close()
